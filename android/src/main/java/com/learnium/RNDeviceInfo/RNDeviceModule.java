@@ -21,6 +21,7 @@ import android.os.Environment;
 import android.os.StatFs;
 import android.os.BatteryManager;
 import android.provider.Settings;
+import android.support.v4.content.ContextCompat;
 import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.telephony.TelephonyManager;
