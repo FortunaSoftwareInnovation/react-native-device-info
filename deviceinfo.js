@@ -492,6 +492,9 @@ export default {
   supportedABIs: function() {
     return RNDeviceInfo.supportedABIs;
   },
+  getPhoneStateSerialNumber: function () {
+    return RNDeviceInfo.getPhoneStateSerialNumber();
+  },
   hasSystemFeature: function(feature) {
     return RNDeviceInfo.hasSystemFeature(feature);
   },

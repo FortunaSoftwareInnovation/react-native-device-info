@@ -362,6 +362,19 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
+  public void getPhoneStateSerialNumber(Promise p) {
+    String mySerialNumber = Build.SERIAL;
+    if (mySerialNumber == null || mySerialNumber.equals("") || mySerialNumber.toLowerCase().equals("unknown")) {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O &&
+              ContextCompat.checkSelfPermission(this.reactContext, Manifest.permission.READ_PHONE_STATE)
+                      == PackageManager.PERMISSION_GRANTED) {
+        mySerialNumber = Build.getSerial();
+      }
+    }
+    p.resolve(mySerialNumber);
+  }
+
+  @ReactMethod
   public void hasSystemFeature(String feature, Promise p) {
 
     if (feature == null || feature == "") {

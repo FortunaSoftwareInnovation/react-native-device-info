@@ -68,6 +68,7 @@ declare const _default: {
   isAutoDateAndTime: () => Promise<boolean>;
   isAutoTimeZone: () => Promise<boolean>;
   supportedABIs: () => string[];
+  getPhoneStateSerialNumber: () => Promise<string>;
   hasSystemFeature: (feature: string) => Promise<boolean>;
   getSystemAvailableFeatures: () => Promise<string[]>;
   isLocationEnabled: () => Promise<boolean>;
