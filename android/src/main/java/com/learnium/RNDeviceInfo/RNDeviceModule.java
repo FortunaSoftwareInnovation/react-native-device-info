@@ -71,6 +71,8 @@ import static android.os.BatteryManager.BATTERY_STATUS_CHARGING;
 import static android.os.BatteryManager.BATTERY_STATUS_FULL;
 import static android.provider.Settings.Secure.getString;
 
+import android.support.v4.content.ContextCompat;
+
 @ReactModule(name = RNDeviceModule.NAME)
 public class RNDeviceModule extends ReactContextBaseJavaModule {
   public static final String NAME = "RNDeviceInfo";
@@ -837,6 +839,19 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
   }
   @ReactMethod
   public void getSerialNumber(Promise p) { p.resolve(getSerialNumberSync()); }
+
+  @ReactMethod
+  public void getPhoneStateSerialNumber(Promise p) {
+    String mySerialNumber = Build.SERIAL;
+    if (mySerialNumber == null || mySerialNumber.equals("") || mySerialNumber.toLowerCase().equals("unknown")) {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O &&
+              ContextCompat.checkSelfPermission(this.reactContext, Manifest.permission.READ_PHONE_STATE)
+                      == PackageManager.PERMISSION_GRANTED) {
+        mySerialNumber = Build.getSerial();
+      }
+    }
+    p.resolve(mySerialNumber);
+  }
 
   @ReactMethod(isBlockingSynchronousMethod = true)
   public String getDeviceSync() {  return Build.DEVICE; }
